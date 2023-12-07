@@ -19,8 +19,10 @@ public class PlayerController : MonoBehaviour
 
             if (input != Vector2.zero) {
                 var targetPos = transform.position;
-                targetPos.x += input.x;
-                targetPos.y += input.y;
+
+                //mathematics allows for less sliding of the player character
+                targetPos.x += (input.x * 0.1f);
+                targetPos.y += (input.y * 0.1f);
 
                 StartCoroutine(Move(targetPos));
             }
