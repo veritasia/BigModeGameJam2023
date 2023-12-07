@@ -10,14 +10,27 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 input;
 
+    private Animator animator;
+
+    private void Awake() {
+        animator = GetComponent<Animator>();
+    }
+
     private void Update() {
         if (!isMoving) {
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
 
+            Debug.Log("This is input.x:" + input.x);
+            Debug.Log("This is input.y" + input.y);
+
             if (input.x != 0) input.y = 0;
 
             if (input != Vector2.zero) {
+
+                animator.SetFloat("moveX", input.x);
+                animator.SetFloat("moveY", input.y);
+
                 var targetPos = transform.position;
 
                 //mathematics allows for less sliding of the player character
@@ -27,6 +40,8 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Move(targetPos));
             }
         }
+
+        animator.SetBool("isMoving", isMoving);
     }
 
     IEnumerator Move(Vector3 targetPos) {
