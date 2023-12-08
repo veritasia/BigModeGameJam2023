@@ -14,8 +14,8 @@ public class DialogueTrigger : MonoBehaviour
     }
 
     private void Update(){
-        if(playerInRange){
-            if(Input.GetKey(KeyCode.Return)){
+        if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
+            if(Input.GetKey(KeyCode.C)){
                 DialogueManager.GetInstance().EnterDialogueMode(inkjson);
             }
         }else{

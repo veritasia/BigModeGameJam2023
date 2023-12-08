@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI dialogueText;
     private Story currentStory;
-    private bool dialogueIsPlaying;
+    public bool dialogueIsPlaying { get; private set; }
     private static DialogueManager instance;
 
     private void Awake(){
@@ -44,7 +44,7 @@ public class DialogueManager : MonoBehaviour
 
         //handle continuing to next line in dialogue when submit pressed
         //in our case, i'm lazy so i decided to use enter instead
-        if(Input.GetKeyDown(KeyCode.Return)){
+        if(Input.GetKeyDown(KeyCode.C)){
             ContinueStory();
         }
     }
@@ -70,9 +70,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     IEnumerator waiter(){
+        yield return new WaitForSeconds(0.2f);
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
-        yield return new WaitForSeconds(3);
         dialogueIsPlaying = false;
     }
 }
