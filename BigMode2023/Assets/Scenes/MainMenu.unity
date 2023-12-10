@@ -766,6 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c9d8ce69d7ffb4fbef75b6d45571c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inkjson: {fileID: 4900000, guid: 34d296f286c5b4e4eb1c521028f6fdc4, type: 3}
   startGame: {fileID: 433513451}
   continueButton: {fileID: 1931035670}
   settings: {fileID: 1939056617}

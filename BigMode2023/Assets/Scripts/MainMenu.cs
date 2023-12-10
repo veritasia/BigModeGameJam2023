@@ -7,6 +7,8 @@ using System;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Ink Jason For Start of Game")]
+    [SerializeField] private TextAsset inkjson;
     [SerializeField] Button startGame;
     [SerializeField] Button continueButton;
     [SerializeField] Button settings;
@@ -30,6 +32,7 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
         SceneManager.UnloadSceneAsync(currentScene);
+        DialogueManager.GetInstance().EnterDialogueMode(inkjson);
     }
 
     void playGame(){
