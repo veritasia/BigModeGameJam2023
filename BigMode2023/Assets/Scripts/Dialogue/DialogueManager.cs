@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Ink.Runtime;
 
@@ -11,9 +12,13 @@ public class DialogueManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private Image displayImage;
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
     private static DialogueManager instance;
+    private const string SPEAKER_TAG = "speaker";
+    private const string PORTRAIT_TAG = "portrait";
 
     private void Awake(){
         if(instance != null){
@@ -64,8 +69,37 @@ public class DialogueManager : MonoBehaviour
     private void ContinueStory(){
         if(currentStory.canContinue){
             dialogueText.text = currentStory.Continue();
+            //handling tags
+            HandleTags(currentStory.currentTags);
         }else{
             ExitDialogueMode();
+            displayImage.gameObject.SetActive(false);
+        }
+    }
+
+    private void HandleTags(List<string> currentTags){
+        foreach(string tag in currentTags){
+            //parse tag
+            string[] splitTag = tag.Split(":");
+            if(splitTag.Length != 2){
+                Debug.LogError("No lmao");
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+
+            switch(tagKey){
+                case SPEAKER_TAG:
+                    displayNameText.text = tagValue;
+                    break;
+                case PORTRAIT_TAG:
+                    displayImage.gameObject.SetActive(true);
+                    displayImage.sprite = Resources.Load<Sprite>(tagValue);
+                    Debug.Log(tagValue);
+                    break;
+                default:
+                    Debug.LogError("This aint s'possed ta happen");
+                    break;
+            }
         }
     }
 
