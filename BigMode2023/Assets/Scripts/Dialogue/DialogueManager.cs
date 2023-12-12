@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     private static DialogueManager instance;
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
+    private const string EXTRA_TAG = "extra";
 
     private void Awake(){
         if(instance != null){
@@ -104,6 +105,11 @@ public class DialogueManager : MonoBehaviour
                         Debug.Log(tagValue);
                     }
                     break;
+                case EXTRA_TAG:
+                    if(tagValue == "jayRoom"){
+                        StartCoroutine(switchScene(tagValue));
+                    }
+                    break;
                 default:
                     Debug.LogError("This aint s'possed ta happen");
                     break;
@@ -116,5 +122,18 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueIsPlaying = false;
+    }
+
+    IEnumerator switchScene(string whatScene){
+        while(dialogueIsPlaying){
+            yield return null;
+        }
+        switch(whatScene){
+            case "jayRoom":
+                JayRoom.GetInstance().noMoreRoom();
+                break;
+            case null:
+                break;
+        }
     }
 }
