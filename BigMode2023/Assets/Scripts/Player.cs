@@ -6,6 +6,7 @@ public static class Player
 {
     public static int hp = 4;
     public static int cartridge = 1;
+    public static int charges = 0;
     public static Item[] items = new Item[3];
     public static int amountItems = 0;
 
