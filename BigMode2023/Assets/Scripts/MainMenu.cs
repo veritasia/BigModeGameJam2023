@@ -11,12 +11,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TextAsset inkjson;
     [SerializeField] Button startGame;
     [SerializeField] Button continueButton;
-    [SerializeField] Button settings;
+    [SerializeField] Button settingsButton;
+    [SerializeField] Button exitButton;
 
     // Start is called before the first frame update
     void Start()
     {
         startGame.onClick.AddListener(playGame);
+        exitButton.onClick.AddListener(exitGame);
     }
 
     // Update is called once per frame
@@ -32,10 +34,15 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
         SceneManager.UnloadSceneAsync(currentScene);
-        DialogueManager.GetInstance().EnterDialogueMode(inkjson);
+        //DialogueManager.GetInstance().EnterDialogueMode(inkjson);
     }
 
     void playGame(){
         StartCoroutine(actuallyStartGame());
+    }
+
+    void exitGame(){
+        Application.Quit();
+        Debug.Log("The world explodes");
     }
 }

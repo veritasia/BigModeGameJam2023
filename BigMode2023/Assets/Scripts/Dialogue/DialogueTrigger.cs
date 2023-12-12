@@ -5,9 +5,10 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
 
-    [Header("Ink Jason")]
-    [SerializeField] private TextAsset inkjson;
+    [Header("Ink Jason for Room")]
+    [SerializeField] private TextAsset inkRoom;
     private bool playerInRange;
+    private string bumpedIntoWhat = "";
 
     private void Awake(){
         playerInRange = false;
@@ -16,7 +17,13 @@ public class DialogueTrigger : MonoBehaviour
     private void Update(){
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
             if(Input.GetKey(KeyCode.C)){
-                DialogueManager.GetInstance().EnterDialogueMode(inkjson);
+                switch(bumpedIntoWhat){
+                    case "Door":
+                        DialogueManager.GetInstance().EnterDialogueMode(inkRoom);
+                        break;
+                    case null:
+                        break;
+                }
             }
         }else{
         }
@@ -25,6 +32,7 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.tag == "Interactable"){
             playerInRange = true;
+            bumpedIntoWhat = collider.gameObject.transform.parent.name;
         }
     }
 
