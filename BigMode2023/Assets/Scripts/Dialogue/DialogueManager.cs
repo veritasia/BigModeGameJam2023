@@ -92,9 +92,17 @@ public class DialogueManager : MonoBehaviour
                     displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
-                    displayImage.gameObject.SetActive(true);
-                    displayImage.sprite = Resources.Load<Sprite>(tagValue);
-                    Debug.Log(tagValue);
+                    Color tmp = displayImage.GetComponent<Image>().color;
+                    if(tagValue == "none"){
+                        tmp.a = 0f;
+                        displayImage.GetComponent<Image>().color = tmp;
+                    }else{
+                        tmp.a = 255f;
+                        displayImage.GetComponent<Image>().color = tmp;
+                        displayImage.gameObject.SetActive(true);
+                        displayImage.sprite = Resources.Load<Sprite>(tagValue);
+                        Debug.Log(tagValue);
+                    }
                     break;
                 default:
                     Debug.LogError("This aint s'possed ta happen");

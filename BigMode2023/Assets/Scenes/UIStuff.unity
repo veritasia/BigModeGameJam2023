@@ -1773,7 +1773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cccc5bac4acce4441a67ed215d5d59eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkjson: {fileID: 4900000, guid: 2b41b31a54d06434da8f6edd17641b1c, type: 3}
+  inkjson: {fileID: 4900000, guid: 3539dc7f4eca00049bc8c051bd97fde0, type: 3}
 --- !u!61 &1980700444
 BoxCollider2D:
   m_ObjectHideFlags: 0
